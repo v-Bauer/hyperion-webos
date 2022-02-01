@@ -179,7 +179,7 @@ int capture_start()
 
     // Prepare offsets table (needs to be ptr[vfbcap.numVfs][vbcap.numPlanes])
     if (DILE_VT_GetVideoFrameBufferCapability(vth, &vfbcap) != 0) {
-        return -9;
+        usleep(30000);
     }
 
     INFO("[DILE_VT] vfbs: %d; planes: %d", vfbcap.numVfbs, vfbcap.numPlanes);
