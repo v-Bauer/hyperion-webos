@@ -179,6 +179,7 @@ int capture_start()
 
     // Prepare offsets table (needs to be ptr[vfbcap.numVfs][vbcap.numPlanes])
     if (DILE_VT_GetVideoFrameBufferCapability(vth, &vfbcap) != 0) {
+        return -9;
     }
 
     INFO("[DILE_VT] vfbs: %d; planes: %d", vfbcap.numVfbs, vfbcap.numPlanes);
@@ -339,8 +340,7 @@ void* capture_thread_target(void* data) {
 void* vsync_thread_target(void* data) {
     INFO("vsync_thread_target called.");
     while (capture_running) {
-        //DILE_VT_WaitVsync(vth, 0, 0);
-        usleep(30000)
+        usleep(30000);
         pthread_mutex_lock(&vsync_lock);
         pthread_cond_signal(&vsync_cond);
         pthread_mutex_unlock(&vsync_lock);
